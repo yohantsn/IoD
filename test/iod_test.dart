@@ -58,6 +58,15 @@ void main() {
         ),
       );
     });
+
+    test("Try register the other Instance of the same object case", () {
+      expect(
+        () => IoD.register<ITestInjection>(TestInjection2()),
+        throwsA(
+          const TypeMatcher<IoDException>(),
+        ),
+      );
+    });
   });
 }
 
@@ -66,6 +75,13 @@ abstract class ITestInjection {
 }
 
 class TestInjection implements ITestInjection {
+  @override
+  String getText(String text) {
+    return text;
+  }
+}
+
+class TestInjection2 implements ITestInjection {
   @override
   String getText(String text) {
     return text;
