@@ -32,7 +32,7 @@ jobs:
       - name: Analyze project source
         run: dart analyze
         
-      - run: flutter test --coverage .
+      - run: flutter test --coverage 
       - uses: codecov/codecov-action@v1.0.2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
