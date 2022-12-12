@@ -35,3 +35,4 @@ To get the instance you need to use the method read, like that:
 ```
     final persistence = IoD.read<IPersistence>();
 ```
+
