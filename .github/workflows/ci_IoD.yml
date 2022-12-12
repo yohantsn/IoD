@@ -22,6 +22,12 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: "stable"
+
+      - name: run tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          script: ./gradlew connectedCheck
       # End Setup
 
       
