@@ -27,6 +27,7 @@ jobs:
       
       - name: Install dependencies
         run: dart pub get
+      - run: cd example && dart pub get
 
       - name: Analyze project source
         run: dart analyze
