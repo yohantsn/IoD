@@ -11,16 +11,12 @@ void main() {
       app.main();
       await tester.pumpAndSettle();
 
-      // Finds the floating action button to tap on.
       final Finder fab = find.byTooltip('Read');
 
-      // Emulate a tap on the floating action button.
       await tester.tap(fab);
 
-      // Trigger a frame.
       await tester.pumpAndSettle();
 
-      // Verify the counter increments by 1.
       expect(find.text('Working'), findsOneWidget);
     });
   });
