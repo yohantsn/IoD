@@ -39,3 +39,6 @@ jobs:
       - uses: codecov/codecov-action@v1.0.2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Run integration test on example
+        run: flutter test integration_test
