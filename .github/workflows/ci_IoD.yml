@@ -9,6 +9,7 @@ on:
     branches: [ "master" ]
 
 jobs:
+
   build:
     runs-on: macos-latest
 
@@ -23,13 +24,6 @@ jobs:
         with:
           channel: "stable"
 
-      - name: run tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-          script: ./gradlew connectedCheck
-      # End Setup
-
       
       - name: Install dependencies
         run: dart pub get
@@ -43,5 +37,29 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
-      - name: Run integration test on example
-        run: cd example && flutter test integration_test
+  android:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        api-level:
+          - 29
+          # you can add more API level if you want to run your tests on different API
+      fail-fast: true
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          # instead of "channel: stable", you could be more precise by specifying the exact version of Flutter you're using:
+          # flutter-version: '<FLUTTER_VERSION>'
+      - name: Install Flutter dependencies
+        run: flutter pub get
+      - name: Run integration tests
+        # more info on https://github.com/ReactiveCircus/android-emulator-runner
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          arch: x86_64
+          profile: Nexus 6
+          script: cd example && flutter test integration_test --verbose
