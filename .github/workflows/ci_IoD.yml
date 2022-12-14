@@ -12,10 +12,10 @@ jobs:
 
   build:
     runs-on: macos-latest
-    strategy:
-      matrix:
-        api-level: [29]
-        target: [playstore]
+    # strategy:
+    #   matrix:
+    #     api-level: [29]
+    #     target: [playstore]
 
     steps:
       # Begin Setup
@@ -44,22 +44,22 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
 
           # Run integration test
-      - name: Run Flutter Driver tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          target: ${{ matrix.target }}
-          api-level: ${{ matrix.api-level }}
-          arch: x86_64
-          profile: Nexus 6
-          script: cd example && flutter test integration_test
+      # - name: Run Flutter Driver tests
+      #   uses: reactivecircus/android-emulator-runner@v2
+      #   with:
+      #     target: ${{ matrix.target }}
+      #     api-level: ${{ matrix.api-level }}
+      #     arch: x86_64
+      #     profile: Nexus 6
+      #     script: cd example && flutter test integration_test
 
-      # Update screenshot to artifact
-      - name: Upload screenshots
-        if: always()
-        uses: actions/upload-artifact@v1
-        with:
-          name: screenshot
-          path: ${{ matrix.path }}screenshots/
+      # # Update screenshot to artifact
+      # - name: Upload screenshots
+      #   if: always()
+      #   uses: actions/upload-artifact@v1
+      #   with:
+      #     name: screenshot
+      #     path: ${{ matrix.path }}screenshots/
 
       
 
