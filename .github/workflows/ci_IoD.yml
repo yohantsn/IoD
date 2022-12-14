@@ -12,6 +12,10 @@ jobs:
 
   build:
     runs-on: macos-latest
+    strategy:
+      matrix:
+        api-level: [29]
+        target: [playstore]
 
     steps:
       # Begin Setup
@@ -37,29 +41,24 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
-  android:
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        api-level:
-          - 29
-          # you can add more API level if you want to run your tests on different API
-      fail-fast: true
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup Flutter SDK
-        uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          # instead of "channel: stable", you could be more precise by specifying the exact version of Flutter you're using:
-          # flutter-version: '<FLUTTER_VERSION>'
-      - name: Install Flutter dependencies
-        run: flutter pub get
-      - name: Run integration tests
-        # more info on https://github.com/ReactiveCircus/android-emulator-runner
+          # Run integration test
+      - name: Run Flutter Driver tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
+          target: ${{ matrix.target }}
           api-level: ${{ matrix.api-level }}
           arch: x86_64
           profile: Nexus 6
-          script: cd example && flutter test integration_test --verbose
+          script: cd example && flutter test integration_test
+
+      # Update screenshot to artifact
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v1
+        with:
+          name: screenshot
+          path: ${{ matrix.path }}screenshots/
+
+      
+
+      
