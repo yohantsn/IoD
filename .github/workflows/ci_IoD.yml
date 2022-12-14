@@ -1,21 +1,12 @@
-
-
 name: CI IoD Package
 
 on:
-  push:
-    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
 jobs:
-
   build:
     runs-on: macos-latest
-    # strategy:
-    #   matrix:
-    #     api-level: [29]
-    #     target: [playstore]
 
     steps:
       # Begin Setup
@@ -27,40 +18,17 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: "stable"
+      # End Setup
 
       
       - name: Install dependencies
-        run: flutter clean
-      - run: flutter pub get
-      - run: cd example && flutter clean
-      - run: cd example && flutter pub get
+        run: dart pub get
+      - run: cd example && dart pub get
 
       - name: Analyze project source
         run: dart analyze
         
-      - run: flutter test --coverage 
+      - run: flutter test --coverage .
       - uses: codecov/codecov-action@v1.0.2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-
-          # Run integration test
-      # - name: Run Flutter Driver tests
-      #   uses: reactivecircus/android-emulator-runner@v2
-      #   with:
-      #     target: ${{ matrix.target }}
-      #     api-level: ${{ matrix.api-level }}
-      #     arch: x86_64
-      #     profile: Nexus 6
-      #     script: cd example && flutter test integration_test
-
-      # # Update screenshot to artifact
-      # - name: Upload screenshots
-      #   if: always()
-      #   uses: actions/upload-artifact@v1
-      #   with:
-      #     name: screenshot
-      #     path: ${{ matrix.path }}screenshots/
-
-      
-
-      
