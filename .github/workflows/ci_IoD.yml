@@ -30,8 +30,10 @@ jobs:
 
       
       - name: Install dependencies
-        run: dart pub get
-      - run: cd example && dart pub get
+        run: flutter clean
+      - run: flutter pub get
+      - run: cd example && flutter clean
+      - run: cd example && flutter pub get
 
       - name: Analyze project source
         run: dart analyze
