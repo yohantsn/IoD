@@ -32,6 +32,6 @@ jobs:
         run: flutter analyze
 
       - name: Run tests
-        run: dart test
+        run: flutter test
         
         
