@@ -8,8 +8,8 @@ The objective of this package is provide a simple way to do the Dependency Injec
 
 Add the code bellow at pubspec.yaml on your project.
 ```
-  iod: 
-    git: git@github.com:yohantsn/IoD.git
+  dependencies:
+    iod: ^0.0.1-alpha
 ```
 
 ## How to use
