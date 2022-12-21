@@ -2,6 +2,8 @@
 
 The objective of this package is provide a simple way to do the Dependency Injection.
 
+*Attention this a alpha version.*
+
 ## How Implement
 
 Add the code bellow at pubspec.yaml on your project.
