@@ -1,6 +1,6 @@
 # IoD - Dependency Injection
 
-https://codecov.io/github/yohantsn/IoD/settings/badge
+https://codecov.io/github/yohantsn/IoD/master/settings/badge
 
 
 
