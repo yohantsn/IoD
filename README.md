@@ -1,6 +1,8 @@
 # IoD - Dependency Injection
 
-[](https://codecov.io/github/yohantsn/IoD/master/settings/badge)
+[![Pub Version](https://img.shields.io/pub/v/badges?color=blueviolet)](https://pub.dev/packages/iod)
+[![codecov](https://codecov.io/github/yohantsn/IoD/branch/master/graph/badge.svg?token=BEX1A1NUG7)](https://codecov.io/github/yohantsn/IoD)
+[![popularity](https://img.shields.io/pub/popularity/badges?logo=dart)](https://pub.dev/packages/iod/score)
 
 
 
