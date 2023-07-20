@@ -1,5 +1,9 @@
 # IoD - Dependency Injection
 
+![](https://codecov.io/github/yohantsn/IoD/settings/badge)
+
+
+
 The objective of this package is provide a simple way to do the Dependency Injection.
 
 ## How to use
