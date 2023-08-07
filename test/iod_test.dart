@@ -3,6 +3,7 @@ import 'package:iod/iod.dart';
 
 void main() {
   final testInjection = TestInjection();
+  final testInjection1 = TestInjection1();
   group("Test success cases", () {
     test("Simple case", () {
       IoD();
@@ -30,10 +31,40 @@ void main() {
     });
   });
 
+  group("Test with more objects cases", () {
+    test("Simple case", () {
+      IoD();
+      IoD.register<ITestInjection>(testInjection);
+      IoD.register<ITestInjection1>(testInjection1);
+      final testInjec = IoD.read<ITestInjection>();
+      final testInjec1 = IoD.read<ITestInjection1>();
+
+      expect(testInjec, testInjection);
+      expect(testInjec1, testInjection1);
+
+      expect(testInjec.getText("1"), "1");
+    });
+
+    test("Remove object case", () {
+      final testInjec1 = IoD.read<ITestInjection1>();
+
+      expect(testInjec1, testInjection1);
+
+      IoD.removeObject<ITestInjection1>();
+
+      expect(
+        () => IoD.read<ITestInjection1>(),
+        throwsA(
+          const TypeMatcher<IoDException>(),
+        ),
+      );
+    });
+  });
+
   group("Test errors cases", () {
     test("Read without register case", () {
       expect(
-        () => IoD.read<ITestInjection>(),
+        () => IoD.read<ITestInjection1>(),
         throwsA(
           const TypeMatcher<IoDException>(),
         ),
@@ -42,7 +73,7 @@ void main() {
 
     test("Remove without register case", () {
       expect(
-        () => IoD.removeObject<ITestInjection>(),
+        () => IoD.removeObject<ITestInjection1>(),
         throwsA(
           const TypeMatcher<IoDException>(),
         ),
@@ -50,7 +81,6 @@ void main() {
     });
 
     test("Try register the same Object case", () {
-      IoD.register<ITestInjection>(testInjection);
       expect(
         () => IoD.register<ITestInjection>(testInjection),
         throwsA(
@@ -75,6 +105,17 @@ abstract class ITestInjection {
 }
 
 class TestInjection implements ITestInjection {
+  @override
+  String getText(String text) {
+    return text;
+  }
+}
+
+abstract class ITestInjection1 {
+  String getText(String text);
+}
+
+class TestInjection1 implements ITestInjection1 {
   @override
   String getText(String text) {
     return text;
