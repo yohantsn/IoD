@@ -1,6 +1,6 @@
 name: iod
 description: The objective of this package is provide a simple way to do the Dependency Injection.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/yohantsn
 
 environment:
