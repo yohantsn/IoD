@@ -14,7 +14,7 @@ class IoD {
   ///
   ///`final foo = IoD.read<IFoo>()`
   static T read<T>() {
-    final instance = _cache[T.runtimeType];
+    final instance = _cache[T];
 
     if (instance == null) {
       throw IoDException("You must create an instance of this object!");
@@ -27,20 +27,20 @@ class IoD {
   ///
   ///`IoD.register<IFoo>(Foo())`
   static register<T>(T object) {
-    if (_cache[T.runtimeType] != null) {
+    if (_cache[T] != null) {
       throw IoDException("This object is already instantiated!");
     }
-    _cache.addAll({T.runtimeType: object});
+    _cache.addAll({T: object});
   }
 
   ///You can remove a instance using this mehtod, Example:
   ///
   ///`IoD.removeObject<IFoo>()`
   static removeObject<T>() {
-    if (_cache[T.runtimeType] == null) {
+    if (_cache[T] == null) {
       throw IoDException("You must create an instance of this object before to remove it!");
     }
-    _cache.remove(T.runtimeType);
+    _cache.remove(T);
   }
 }
 

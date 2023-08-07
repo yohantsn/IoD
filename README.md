@@ -1,5 +1,10 @@
 # IoD - Dependency Injection
 
+[![Pub Version](https://img.shields.io/pub/v/badges?color=blueviolet)](https://pub.dev/packages/iod)
+[![codecov](https://codecov.io/github/yohantsn/IoD/branch/master/graph/badge.svg?token=BEX1A1NUG7)](https://codecov.io/github/yohantsn/IoD)
+
+
+
 The objective of this package is provide a simple way to do the Dependency Injection.
 
 ## How to use
